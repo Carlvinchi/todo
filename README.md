@@ -2,7 +2,7 @@
 
 This is for distributed systems project
 
-To run this project you need xammp and mysql installed or a loalhost server for php and mysql
+To run this project you need xampp and mysql installed or a loalhost server for php and mysql
 
 Navigate to todo/backend/includes/config.php 
 
