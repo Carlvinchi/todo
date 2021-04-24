@@ -94,6 +94,7 @@ class User{
         if(password_verify($password, $row["password"])){
             $_SESSION['email'] = $row['user_email'];
             $_SESSION['username'] = $row['username'];
+            $_SESSION['userid'] = $row["userid"];
 
             return "Success";
             exit;

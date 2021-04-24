@@ -1,5 +1,5 @@
 <?php
-
+session_start();
     // including all files for initialization
 
     require_once("config.php");

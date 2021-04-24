@@ -17,5 +17,5 @@ $task = new Task($connect);
 
 // attempt to get data
 $data = $task->get_all_user_tasks($userid);
-
+$data = json_encode($data);
 echo $data;

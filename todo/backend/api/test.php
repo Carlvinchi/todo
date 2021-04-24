@@ -12,9 +12,14 @@ $task = new Task($connect);
 //$test = $user->user_login($email, $password);
 //$add = $task->create_task("Will Wash", "I will wash today", 1);
 //$get = $task->get_all_task();
-//$get_user_task = $task->get_all_user_tasks(2);
+$data = $task->get_all_user_tasks(2);
 //$update = $task->update_task(1,3,"Will Dance","I will Dance this evening","Completed");
 //$del = $task->delete_task(1,2);
 //$delAll = $task->delete_all_user_tasks(1);
 
-//var_dump($get_user_task);
+ //$result = json_decode($data);
+ foreach($data as $item){
+    echo $item["title"];
+ }
+ 
+//var_dump($data[0]);

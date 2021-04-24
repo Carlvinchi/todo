@@ -75,12 +75,10 @@ class Task{
         $pre_stmt = $this->conn->prepare("SELECT * FROM $this->table ");
         $data = $this->getData($pre_stmt);
         if(sizeof($data) == 0){
-            return json_encode(
-                array("message"=>"No data")
-            );
+            return "No data";
             exit;
         }
-        return json_encode($data);
+        return $data;
         exit;
 
     }
@@ -90,12 +88,23 @@ class Task{
         $pre_stmt->bind_param("s", $userid);
         $data = $this->getData($pre_stmt);
         if(sizeof($data) == 0){
-            return json_encode(
-                array("message"=>"No data")
-            );
+            return "No data";
             exit;
         }
-        return json_encode($data);
+        return $data;
+        exit;
+
+    }
+
+    public function get_all_user_tasks_paginate($userid, $page_no){
+        $pre_stmt = $this->conn->prepare("SELECT * FROM $this->table WHERE userid = ? ORDER BY taskid DESC LIMIT ?,25");
+        $pre_stmt->bind_param("ss", $userid, $page_no);
+        $data = $this->getData($pre_stmt);
+        if(sizeof($data) == 0){
+            return "No data";
+            exit;
+        }
+        return $data;
         exit;
 
     }
@@ -105,16 +114,44 @@ class Task{
         $pre_stmt->bind_param("ss", $userid, $taskid);
         $data = $this->getData($pre_stmt);
         if(sizeof($data) == 0){
-            return json_encode(
-                array("message"=>"No data")
-            );
+            return "No data";
             exit;
         }
-        return json_encode($data);
+        return $data;
         exit;
 
     }
 
+    public function getPending($userid){
+        $status = 'Pending';
+        $pre_stmt = $this->conn->prepare("SELECT * FROM $this->table WHERE userid = ? AND status = ?");
+        $pre_stmt->bind_param("ss", $userid, $status);
+        $data = $this->getData($pre_stmt);
+        if(sizeof($data) == 0){
+            return 0;
+            exit;
+        }
+        return $data;
+        exit;
+
+    }
+
+
+    public function getCompleted($userid){
+        $status = 'Completed';
+        $pre_stmt = $this->conn->prepare("SELECT * FROM $this->table WHERE userid = ? AND status = ?");
+        $pre_stmt->bind_param("ss", $userid, $status);
+        $data = $this->getData($pre_stmt);
+        if(sizeof($data) == 0){
+            return 0;
+            exit;
+        }
+        return $data;
+        exit;
+
+    }
+
+    
     public function update_task($userid,$taskid,$title,$description,$status){
         $pre_stmt = $this->conn->prepare("UPDATE $this->table SET title = ?, description = ?, status  = ? WHERE userid = ? AND taskid = ?");
         $pre_stmt->bind_param("sssss", $title, $description, $status, $userid, $taskid);
