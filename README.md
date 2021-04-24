@@ -1,6 +1,6 @@
 # todo
 
-This is for ds project for distributed systems project
+This is for distributed systems project
 
 To run this project you need xammp and mysql installed or a loalhost server for php and mysql
 
